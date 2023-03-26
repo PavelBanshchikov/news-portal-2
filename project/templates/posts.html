@@ -1,0 +1,31 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+<!-- Название у нас будет products -->
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h1>Все новости </h1>
+<h2>Всего новостей: {{posts|length}}</h2>
+
+<table>
+    <tr>
+        <td>Время создания</td>
+        <td>Категория</td>
+        <td>Заголовок</td>
+        <td>Текст</td>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{post.time_in|date:'d M Y'}}</td>
+        <td>{{post.category_type}}</td>
+        <td>{{post.header|censor}}</td>
+        <td>{{post.text_post|truncatechars:20 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
